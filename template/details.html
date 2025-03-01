@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/database.css')}}">
+</head>
+<body id="container">
+    <div id="card">
+        <h1>YIYAM Membership </h1>
+        <p>User Id: {{data[0]}}</p>
+        <p>Name: {{data[1]}}</p>
+        <p>Mobile No: {{data[3]}}</p>
+        <p>Blood Group: {{data[4]}}</p>
+        <p>City: {{data[2]}}</p>
+    </div>
+    <script>
+        console.log(data)
+    </script>
+</body>
+</html>

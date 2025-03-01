@@ -1,0 +1,33 @@
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/erase.css') }}">
+  <title>Sthish login page</title>
+  <script src="https://kit.fontawesome.com/dbf63de95c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="container">
+    <h1 class="header">Remove</h1>
+    <form action="/erase" method="POST" class="main">
+      <div class="inner">
+        <div class="input">
+          <input type="text" name="user" placeholder="Email or Username" required/>
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="input">
+          <input type="password" name="passw" placeholder="Password"/>
+          <i class="fa-solid fa-lock"></i>
+        </div>
+      </div>
+      <button type="submit" value="login" class="btn"><b>Login</b></button>
+      <div class="end">
+        <h4>You  don't want to Remove your Account!</h4>
+        <a href="/" class="delete">Login</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
