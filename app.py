@@ -5,7 +5,8 @@ import mysql.connector
 app=Flask(__name__,template_folder="template")
 
 conn=mysql.connector.connect(
-    host='localhost',
+    host='0.tcp.in.ngrok.io',
+    port='19216',
     user='root',
     passwd='Sathinj123@',
     database='credential',
