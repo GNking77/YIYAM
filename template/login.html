@@ -1,0 +1,40 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+  <title>Sthish login page</title>
+  <script src="https://kit.fontawesome.com/dbf63de95c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="container">
+    <h1 class="header">Login</h1>
+    <form action="/login" method="POST" class="main">
+      <div class="inner">
+        <div class="input">
+          <input type="text" name="email" placeholder="Email or Username" required/>
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="input">
+          <input type="password" name="passw" placeholder="Password"/>
+          <i class="fa-solid fa-lock"></i>
+        </div>
+      </div>
+      <div class="remember">
+        <span>
+          <input type="checkbox" name="option" class="check-box">
+          <p>Remember Me</p>
+        </span>
+        <span>
+          <a href="/for"><b>Forgot password?</b></a>
+        </span>
+      </div>
+      <button type="submit" value="login" class="btn"><b>Login</b></button>
+      <div class="end">
+        <p>You don't have an account! Please <a href="/reg" >Register</a></p>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

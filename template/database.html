@@ -1,0 +1,251 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/database.css')}}">
+    <link rel="stylesheet" href="/Static/database.css">
+    <script src="https://kit.fontawesome.com/dbf63de95c.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="container">
+        
+        <div id="add">
+                <i id='cancel' class="fa-solid fa-right-from-bracket"></i>
+                <h1>Enter Details</h1>
+                    <form id='enter' class="add-data" action="/Home" method="POST">
+                        <span><input type="text" name="name" id='name' placeholder="Name" required/></span>
+                        <span><input type="text" name="city" id="city" placeholder="City" required/></span>
+                        <span><div class="mobile">+91</div><input type="text" name="mobile" id="mobile" placeholder="Mobile Number" required/></span>
+                        <span><select type="text" name="blood" id='blood' placeholder="Blood Group" required>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select></span>
+                        <span><button class="add-btn" >Enter</button></span>
+                    </form>
+        </div>
+        <div id="update">
+                <i id='u-cancel' class="fa-solid fa-right-from-bracket"></i>
+                <h1>Update Details</h1>
+                    <form class="add-data" action="/update" method="POST">
+                        <input type="hidden" name="userid" id='id' value="">
+                        <span><input type="text" name="name" id='name' placeholder="Name" required/></span>
+                        <span><input type="text" name="city" id="city" placeholder="City" required/></span>
+                        <span><div class="mobile">+91</div><input type="text" name="mobile" id="mobile" placeholder="Mobile Number" required/></span>
+                        <span><select type="text" name="blood" id='blood' placeholder="Blood Group" required>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select></span>
+                        <span><button class="add-btn">Update</button></span>
+                    </form>
+        </div>
+        <div class="right" id="right">
+            <h1>Young India Youth Association</h1>
+            <div class="header">
+                <div id="register">Register</div>
+            </div>
+            <table class="user" id="table">
+                <div id="context-menu">
+                    <div id="open">Open</div>
+                    <div id="edit">Edit</div>
+                    <div id="delete">Delete</div>
+                </div>
+                <tr class="head">
+                    <th>User Id</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Mobile Number</th>
+                    <th>Blood Group</th>
+                </tr>
+                
+                {% for d in data.data%}
+                <tr class="data">
+                    <td>{{d[0]}}</td>
+                    <td>{{d[1]}}</td>
+                    <td>{{d[2]}}</td>
+                    <td>{{d[3]}}</td>
+                    <td>{{d[4]}}</td>
+                </tr>
+                {% endfor %}
+                
+            </table>
+            <div id="confirm">
+                <p>Are sure you want to delete?</p>
+                <div class="button">
+                    <div id="yes">Yes</div>
+                    <div id="no">No</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let a = 1, first='',second='',active='',id={}
+        var target = document.querySelectorAll('.data')
+        var menu = document.getElementById('context-menu')
+        var submit = document.getElementById('enter')
+        var register = document.getElementById('register')
+        var add = document.getElementById('add')
+        var update = document.getElementById('update')
+        var right = document.getElementById('right')
+        var pop_up = document.getElementById('confirm')
+        var yes = document.getElementById('yes')
+        var no = document.getElementById('no')
+        var table = document.getElementById('table')
+        var only_open = document.getElementById('only_open')
+        register.style.display = 'none'
+        document.getElementById('cancel').style.zIndex = '1'
+        document.getElementById('u-cancel').style.zIndex = '1'
+        table.addEventListener('contextmenu',function(e){
+            e.preventDefault();
+            
+        });
+        
+        if('{{data.userid}}'=='0'){
+            register.style.display = 'flex'
+            table.style.top = '30%'
+        }
+
+        if('{{data.userid}}'!='0'){
+            register.style.display = 'none'
+            table.style.top = '20%'
+        }
+        
+        if(register){
+            register.addEventListener('click',()=>{
+                add.style.display = 'flex'
+                document.getElementById('cancel').style.zIndex = '1'
+                register.style.display = 'none'
+            })
+        }
+        if(document.getElementById('cancel')){
+            document.getElementById('cancel').addEventListener('click',() => {
+                register.style.display = 'flex'
+                add.style.display = 'none'
+            })
+        }
+        
+        
+        if(document.getElementById('u-cancel')){
+            document.getElementById('u-cancel').addEventListener('click',() => {
+                update.style.display = 'none'
+            })
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            target.forEach(data =>{
+                
+                data.addEventListener('click',()=>{
+                    
+                    if(a==1){
+                        first=data
+                        if(second!=''){
+                            second.classList.remove('second')
+                        }
+                        
+                        first.classList.add('first')
+                        a = 2
+                    }
+                    
+                    else if(a==2){
+                        second=data
+                        first.classList.remove('first')
+                        second.classList.add('second')
+                        a=1
+                    }
+                })
+                data.addEventListener('contextmenu',(e)=>{
+                    active = data
+                    if(a==1){
+                        first=data
+                        if(second!=''){
+                            second.classList.remove('second')
+                        }
+                        
+                        first.classList.add('first')
+                        a = 2
+                    }
+                    
+                    else if(a==2){
+                        second=data
+                        first.classList.remove('first')
+                        second.classList.add('second')
+                        a=1
+                    }
+                    
+                    menu.style.top = `${e.clientY - 10}px`
+                    menu.style.left = `${e.clientX - 55}px`
+                    menu.style.display= 'flex'
+                    only_open.style.top = `${e.clientY - 50}px`
+                    only_open.style.left = `${e.clientX - 105}px`
+                    only_open.style.display= 'flex'
+
+                })
+                menu.addEventListener('mouseleave',()=>{
+                    menu.style.display= 'none';
+                    only_open.style.display= 'none'
+                    data.classList.remove('first')
+                    data.classList.remove('second')
+                })
+                Operation()
+            })
+        })
+        
+        function Operation(){
+            document.getElementById('open').addEventListener('click',()=>{
+                menu.style.display = 'none'
+                id=active.cells[0].innerText 
+                id = { 'userid': id}
+                id = id.userid
+                window.location.href = `/details?userid=${id}`
+                
+            })
+            document.getElementById('edit').addEventListener('click',()=>{
+                menu.style.display = 'none'
+                update.style.display = 'flex'
+                id=active.cells[0].innerText 
+                id = { 'userid' : id }
+                id = id.userid
+                document.getElementById('id').value = id
+                document.getElementById('back').addEventListener('click', ()=>{
+                    update.style.display = 'none'
+                })
+            })
+            document.getElementById('delete').addEventListener('click',()=>{
+                active.style.background = '#fff'
+                active.style.color = '#080808'
+                menu.style.display = 'none'
+                pop_up.style.display = 'flex'
+                yes.addEventListener('click',()=>{
+                    pop_up.style.display = 'none'
+                    register.style.display = 'flex'
+                    id=active.cells[0].innerText 
+                    id = { 'userid' : id }
+                    id = id.userid
+                    window.location.href = `/delete?userid=${id}`
+                    table.style.top = '30%'
+                    
+                })
+                no.addEventListener('click',()=>{
+                    pop_up.style.display = 'none'
+                })
+            })
+
+        }
+
+
+    </script>
+</body>
+</html>
